@@ -1,0 +1,95 @@
+@(timeStamp: String, nonce: String, payId: String, sign: String, phone:String, fee:Int, real:Int)
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/style.css")" />
+    <script src="@routes.WebJarAssets.at(WebJarAssets.locate("jquery.min.js"))" type="text/javascript"></script>
+    <style type="text/css">.btn_block{background:#35d1ce;}.zy_blue{color:#35d1ce}header{background:#35d1ce;}.ChangeBackgroundColor {background:#35d1ce;}.loginTitle{background:#35d1ce;}</style><title></title>
+  </head>
+  <body>
+    <header class="clearfix">
+
+      <a class="right ac_login" href="#">个人中心</a>
+
+      <span class="title"><span class="logo-l">知鸟网络</span></span>
+    </header>
+    <div class="errTop" style="display:none;"><span class="errBody"></span><a href="javascript:void(0);" class="close"></a></div>
+
+      <!-- 普通收银台 -->
+      <!--商品信息 -->
+    <style>
+    /*css放到css文件中，可以全站使用*/
+    .toggleItem{height:auto; overflow:hidden; word-wrap:break-word; padding-right:20px; position:relative;}
+    .toggleItem .more{line-height:28px; position:absolute; right:10px; top:0; white-space:nowrap; display:block;}
+    .toggleCurrent{height:auto; padding-right:0;}
+    .toggleCurrent .more{display:none;}
+    .toggleItem .shortName{height:auto; overflow:hidden; position:relative;}
+    .toggleItem .lName{display:none;}
+    .toggleCurrent .lName{display:block;}
+    .toggleCurrent .shortName{display:none;}
+    .toggleItem1 {height:auto; padding-right:0;}
+    </style>
+    <div class="bill">
+      <dl class="clearfix border">
+        <dt>商品名称</dt>
+        <dd class="toggleItem">
+          <p class="shortName">@(real) 元 网费-@phone.</p>
+          <p class="lName">@(real)元 网费-18877189898</p>
+        </dd>
+
+      </dl>
+      <dl>
+        <dt>应付金额</dt>
+        <dd><span class="red">@("%.2f".format(fee * 0.01))</span>元</dd>
+      </dl>
+    </div>
+      <!--选择支付方式-->
+    <input type="hidden" id="IgnoreLast">
+    <div class="h3">请选择支付方式</div>
+
+      <!-- 支付方式列表 -->
+    <ul class="paymentList">
+      <li class="normal-li"><a href="#" data-typeid="403" data-discount="100" data-discountnotify="true" data-checkvcoin="false" data-realfee="@("%.2f".format(fee * 0.01)) 元" class="weixin">
+        <span class="current">
+          微信支付
+        </span>
+        <span class="secbtn current"></span>
+      </a></li>
+    </ul>
+    <div class="btn-pay btn_block"><p>确认支付&nbsp;<span>@("%.2f".format(fee * 0.01)) 元</span></p></div>
+
+    <div id="wxifrcontainer" style="display: none">
+      <iframe id="wxifr"></iframe>
+    </div>
+
+    <div class="main clearfix size12 marginT10">
+      <p class="pos-center gray">
+        客服电话：
+        <a href="#" class="marginL10 zy_blue">服务中心</a>
+      </p>
+    </div>
+<script>
+        function onBridgeReady(){
+          WeixinJSBridge.invoke('getBrandWCPayRequest', {
+                    "appId":"wx29b228bf6ccbc4b6",
+                    "timeStamp":"@timeStamp",
+                    "nonceStr":"@nonce", //随机串
+                    "package":"prepay_id=@payId",
+                    "signType":"MD5",         //微信签名方式：
+                    "paySign":"@sign" //微信签名
+                  }, function(res){
+                    alert(res.err_code+res.err_desc+res.err_msg);
+                    if(res.err_msg == "get_brand_wcpay_request：ok" ) {}     // 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。
+                  }
+          );
+        }
+        $('.btn-pay').click(onBridgeReady);
+</script>
+  </body>
+</html>

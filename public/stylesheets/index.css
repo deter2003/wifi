@@ -1,0 +1,251 @@
+/* 
+* @Author: WellsFeng
+* @Date:   2016-09-02 14:22:38
+* @Last Modified by:   WellsFeng
+* @Last Modified time: 2016-10-27 16:37:31
+*/
+.container{
+    width: 100%;
+}
+.phoneWraper{
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+#PhoneNum{
+    font-size: 1.57em;
+    width: 94%;
+    height: 1.6em;
+    line-height: 1.6em;
+    border: none;
+    outline: none;
+    padding: 0.564em 0 0.564em 6%;
+    background-color: #fff;
+}
+.deleteWrap{
+    position: absolute;
+    height: 1.6em;
+    width: 1.6em;
+    right: 2em;
+    top: 1.4em;
+}
+#delete{
+    display: block;
+    height: 1.6em;
+    width: 1.6em;
+    cursor: pointer;
+    background: url(../images/icon_delete1.png) no-repeat;
+    background-size: 0;
+}
+input::-webkit-input-placeholder { 
+    /* WebKit browsers */
+    color: #dedee3;
+    font-weight: normal;
+}
+input:-moz-placeholder { 
+    /* Mozilla Firefox 4 to 18 */
+    color: #dedee3;
+    font-weight: normal;
+}
+input::-moz-placeholder { 
+    /* Mozilla Firefox 19+ */
+    color: #dedee3;
+    font-weight: normal;
+}
+input:-ms-input-placeholder { 
+    /* Internet Explorer 10+ */
+    color: #dedee3;
+    font-weight: normal;
+}
+.mesWraper{
+    width: 94%;
+    height: 1.875em;
+    line-height: 1.875em;
+    background: #f2f2f7;
+    color: #acacaf;
+    padding-left: 6%;
+    font-size: 0.86em;
+}
+.goodsWraper{
+    width: 100%;
+}
+.goodsWraper h2{
+    float: left;
+    width: 50%;
+    font-size: 1.286em;
+    text-align: center;
+    color: #3e3e43;
+    height: 2.5em;
+    line-height: 2.5em;
+    border-bottom: 0.167em solid #f2f2f7;
+    cursor: pointer;
+}
+.goodsWraper .active{
+    color: #63bff6;
+    border-bottom: 0.167em solid #63bff6;
+}
+#hf,#ll{
+    padding: 1.07em 5% 0.9em 5%;
+    width: 90%;
+}
+html .active{
+    display: block;
+}
+#hf li,#ll li{
+    width: 31%;
+    height: 4em;
+    text-align: center;
+    float: left;
+    margin-bottom: 4%;
+    border: 1px solid #dedee3;
+    box-sizing: border-box;
+    border-radius: 0.43em;
+    position: relative;
+    cursor: pointer;
+}
+#hf li:nth-of-type(3n-1),#ll li:nth-of-type(3n-1){
+    margin: 0 3.5%;
+}
+#hf li.current,#ll li.current{
+    background: #66ccff;
+    border: 1px solid #66ccff;
+}
+#hf li.inable,#ll li.inable{
+    border: 1px solid #66ccff;
+}
+#hf li.inable a,#ll li.inable a{
+    color: #63bff6;
+   
+}
+#hf li.current a,#ll li.current a{
+    color: #fff; 
+}
+#hf li a,#ll li a{
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    color: #dedee3;
+    font-size: 1.286em;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+#hf li span,#ll li span{
+    font-size: 0.667em;
+    font-weight: normal;
+}
+.btnSubmit{
+    display: block;
+    width: 90%;
+    margin-left: 5%;
+    height: 2.5em;
+    line-height: 2.5em;
+    color: #fff;
+    text-align: center;
+    border-radius: 0.4em;
+    font-size: 1.286em;
+}
+.btn_inable{
+	background-color: #63bff6;
+}
+.tips{
+    margin: 1.583em 5% 2em;
+    width: 90%;
+    font-size: 0.86em;
+    color: #c2c1c6;
+}
+.tips li{
+    box-sizing: border-box;
+    padding-left: 1.5em;
+}
+.tips span{
+    margin-left: -1.5em;
+}
+.footer{
+    width: 70%;
+    height: 2em;
+    padding: 0 15% 3em;
+}
+.footer a{
+    display: block;
+    line-height: 2em;
+    width: 24%;
+    text-align: center;
+    float: left;
+    color: #63bff6;
+    font-size: 0.8572em;
+    margin: 0 10%;  /* �����Ӻ�����Ҫɾ�� */
+}
+.footer a:nth-of-type(2){
+    /* margin: 0 14%; */
+    float: right;
+}
+.footer a.hide{
+	display: none;
+}
+.ad{
+    max-width: 860px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 2.143em;
+    line-height: 2.143em;
+    background: #b2b2b2;
+}
+.adLoge{
+    display: block;
+    height: 2.143em;
+    width: 15%;
+    position: absolute;
+    background: url(../images/icon_ad.png) no-repeat 50% 0.4em;
+    background-size: 1.3em;
+    z-index: 2;
+}
+.closeAd{
+    display: block;
+    height: 1.4em;
+    width: 1.4em;
+    z-index: 2;
+    position: absolute;
+    right: 5%;
+    top: 0.4em;
+    background: url(../images/icon_delete2.png) no-repeat;
+    background-size: 1.3em;
+    cursor: pointer;
+}
+ul.marquee {
+    /* required styles */
+    display: block;
+    padding: 0;
+    margin: 0 15%;
+    list-style: none;
+    line-height: 1;
+    position: relative;
+    overflow: hidden;
+    /* optional styles for appearance */
+    height: 2.6em; /* height should be included to reserve visual space for the marquee */
+}
+
+ul.marquee li {
+    /* required styles */
+    position: absolute;
+    top: -999em;
+    left: 0;
+    display: block;
+    white-space: nowrap; /* keep all text on a single line */
+    /* optional styles for appearance */
+    color: #fff;
+    height: 2.143em;
+    line-height: 2.143em;
+}
+ul.marquee a{
+    color: #fff;
+}
+#hf li.icos_disable,#ll li.icos_disable{
+    background: url(../images/icon_disable.png) no-repeat;
+    background-size: 2.286em;
+    background-position: right top;
+}

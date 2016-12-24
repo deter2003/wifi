@@ -1,0 +1,80 @@
+@(openid : String)
+
+@scripts = {
+    <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/reset.css")" />
+    <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/index.css")" />
+}
+
+@temp("充值中心", scripts) {
+    <div class="phoneWraper">
+        <input id="PhoneNum" pattern="{\d| }*" type="tel" name="PhoneNum" placeholder="请输入手机号码" maxlength="13" value="">
+        <div class="deleteWrap"><span id="delete"></span></div>
+    </div>
+    <div class="hide active">
+        <ul id="hf" class="clear">
+            <li id="hf_10007" data-gid="1" class="inable" data-price="10.00"><a>10元<br><span id="hf_p_10007">售价:10.00元</span></a></li>
+            <li id="hf_10008" data-gid="2000" class="inable" data-price="20.00"><a>20元<br><span id="hf_p_10008">售价:20.00元</span></a></li>
+            <li id="hf_10009" data-gid="3000" class="inable current" data-price="30.00"><a>30元<br><span id="hf_p_10009">售价:30.00元</span></a></li>
+        </ul>
+        <a href="javascript:void(0)" class="disable btnSubmit btn_inable" id="hf_btnSubmit">立即支付：30.00元</a>
+        <div class="tips">
+            <ul>
+                <li><span>1、</span>充值将在1小时内到账。</li>
+                <li><span>2、</span>请仔细核对您的手机号，确保充值成功进行。</li>
+                <li><span>3、</span>如充值遇到问题，请使用「帮助中心」咨询解决。</li>
+            </ul>
+        </div>
+    </div>
+}
+
+  <script type="text/javascript">
+
+// 充值商品切换
+$('#hf li').click(function() {
+  if($(this).hasClass('disabled')){
+      return;
+  }
+  $(this).siblings('li').removeClass('current');
+  $(this).addClass('current');
+  $('#hf_btnSubmit').addClass('btn_inable');
+  var priceText = $(this).attr('data-price');
+  $('#hf_btnSubmit').text('立即支付：'+priceText+'元');
+});
+
+//充值平台
+$('.btnSubmit').click(
+function(){
+    var $this=$(this);
+    if(!$this.hasClass('btn_inable')){
+        return;
+    }
+    if($this.hasClass('disabled')){
+        return;
+    }
+    $(this).addClass('disabled');
+    var current_goods=$this.parent('div').find('ul li.current');
+    if(!current_goods){
+        return;
+    }
+    var current_gid = current_goods.attr("data-gid");
+    var tipsHTML = '<div class="prompt">';
+    tipsHTML+='正在生成充值订单</div>';
+    $('body').find('.wraper').append(tipsHTML);
+    $.get('/queryUser', { user:$("#PhoneNum").val() },function(data){
+        if (data == 'ok') {
+            location.href='/h5?id=@{openid}&fee='+current_gid+'&user='+$("#PhoneNum").val();
+        } else {
+            var tipsHTML = '<div class="prompt">'+data;
+            tipsHTML+='</div>';
+            $('body').find('.wraper').append(tipsHTML);
+            $this.removeClass('disabled');
+
+            setTimeout(function(){
+                $(".prompt").remove();
+            },500);
+        }
+    });
+});
+
+
+</script>

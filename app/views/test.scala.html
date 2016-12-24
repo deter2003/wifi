@@ -1,0 +1,27 @@
+@routes.WebJarAssets.at(WebJarAssets.locate("jquery.min.js"))
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+function onBridgeReady(){
+  alert("我敢保证，你现在用的是演示一");
+}
+
+if (typeof WeixinJSBridge == "undefined"){
+  if( document.addEventListener ){
+    document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+  }else if (document.attachEvent){
+    document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
+    document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+  }
+}else{
+  onBridgeReady();
+}
+</script>
+</html>
